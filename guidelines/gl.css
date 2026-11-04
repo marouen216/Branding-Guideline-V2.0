@@ -988,3 +988,9 @@ html{scroll-padding-top:24px}
 /* Icon grid tiles are preview-only (downloads live in the Downloads section) */
 .icongrid>span{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--fog);border-bottom:1px solid var(--fog);background:#fff;padding:22%}
 .icongrid.is-dark>span{background:var(--blue);border-color:rgba(255,255,255,.14)}
+/* Voice plate: clear gap between the four pillars so copy never runs into the next column */
+.pv__grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(48px,7cqw,112px);row-gap:clamp(40px,5cqw,72px)}
+.pv__a{min-width:0}
+.pv__a p{max-width:none}
+/* Orbit labels now spell out the full orbit name */
+.orbits b{font-size:clamp(22px,2.2vw,32px);line-height:1.15;text-wrap:balance}
