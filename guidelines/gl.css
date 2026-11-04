@@ -979,3 +979,12 @@ html{scroll-padding-top:24px}
   .face{padding:24px}
   .face__top{flex-wrap:wrap}
 }
+/* Graphic elements: four cards — grid, signal, orbit, equal sign */
+.be .elements-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:980px){.be .elements-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.be .elements-grid{grid-template-columns:minmax(0,1fr)}}
+.be .viz-equal{display:flex;align-items:center;justify-content:center}
+.be .viz-equal img{width:38%;height:auto;display:block}
+/* Icon grid tiles are preview-only (downloads live in the Downloads section) */
+.icongrid>span{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--fog);border-bottom:1px solid var(--fog);background:#fff;padding:22%}
+.icongrid.is-dark>span{background:var(--blue);border-color:rgba(255,255,255,.14)}
