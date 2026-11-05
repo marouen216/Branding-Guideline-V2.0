@@ -941,7 +941,7 @@ html{scroll-padding-top:24px}
 .ims__list--no li{color:var(--slate)}
 
 /* hero: photo with dark overlay */
-.hero__bg{position:absolute;inset:0;background:url("../space42-ds-v2/stock/ss-2597890539.jpg") center/cover no-repeat;z-index:0}
+.hero__bg{position:absolute;inset:0;background:url("../space42-ds-v2/stock/web/ss-2597890539.jpg") center/cover no-repeat;z-index:0}
 .hero__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,5,51,.92) 0%,rgba(15,5,51,.78) 45%,rgba(18,26,107,.45) 100%)}
 .hero__orbit,.hero__in{z-index:1}
 .hero .hero__h{font-size:clamp(44px,6.6vw,104px);line-height:.98;letter-spacing:-.04em}
@@ -994,3 +994,132 @@ html{scroll-padding-top:24px}
 .pv__a p{max-width:none}
 /* Orbit labels now spell out the full orbit name */
 .orbits b{font-size:clamp(22px,2.2vw,32px);line-height:1.15;text-wrap:balance}
+/* Voice plate: fit the panel width instead of a fixed 900px stage, so no pillar is cut off */
+#our-voice .plate__stage{min-width:0}
+#our-voice .pv{padding-left:0}
+#our-voice .pv__grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+@media (max-width:700px){
+  #our-voice .pv__scale{width:100%;height:auto;margin-top:40px;display:flex;flex-wrap:wrap;gap:12px 24px}
+  #our-voice .pv__axis,#our-voice .pv__tick i,#our-voice .pv__f{display:none}
+  #our-voice .pv__tick{position:static;transform:none}
+}
+/* Mission panel: keep the Functional / Emotional grid inside the screen on phones */
+@media (max-width:600px){
+  #platform .pm__grid{grid-template-columns:16px minmax(0,1fr) 36px minmax(0,1fr) 16px}
+  #platform .pm__eq{width:32px}
+  #platform .pm__col{gap:24px}
+  #platform .pm__col p{font-size:13px}
+  #platform .pm__col b{font-size:16px;overflow-wrap:anywhere}
+}
+/* Sonic identity: coming-soon panel */
+.snc{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);border:1px solid rgba(255,255,255,.22)}
+.snc__wave{position:relative;min-height:220px;padding:32px 28px;border-right:1px solid rgba(255,255,255,.22);display:flex;align-items:center}
+.snc .snw{width:100%;height:160px;display:block;overflow:visible}
+.snc .snw__axis{stroke:rgba(255,255,255,.22);stroke-width:1;vector-effect:non-scaling-stroke}
+.snc .snw__thick{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.snc .snw__thin{fill:none;stroke:var(--solar);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.snc__body{padding:clamp(28px,4vw,56px)}
+.snc__eb{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--solar)}
+.snc__h{font-family:var(--display);font-weight:300;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.02em;line-height:1.15;color:#fff;margin-top:14px}
+.snc__p{margin-top:14px;color:var(--blue-200);max-width:52ch}
+.snc__list{margin-top:28px;border-top:1px solid rgba(255,255,255,.22)}
+.snc__list li{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.snc__list b{font-family:var(--display);font-weight:400;color:#fff}
+.snc__list span{color:var(--blue-200);font-size:15px}
+@media (max-width:760px){.snc{grid-template-columns:minmax(0,1fr)}.snc__wave{min-height:140px;border-right:0;border-bottom:1px solid rgba(255,255,255,.22)}.snc .snw{height:110px}.snc__list li{grid-template-columns:minmax(0,1fr);gap:4px}}
+
+/* Arabic: Tajawal (from the Space42 Design System) */
+:root{--arabic:'Tajawal','Tahoma',sans-serif}
+html .be{--font-arabic:'Tajawal','Tahoma',sans-serif}
+[lang="ar"],.rtl-pane.rtl{font-family:var(--arabic)}
+.face--ar{grid-column:1/-1}
+.face__ar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px 40px;align-items:center;font-family:var(--arabic)}
+.face__ar .face__aa{font-family:var(--arabic);font-weight:500;letter-spacing:0;line-height:1.2}
+.face__ar .face__chars{word-break:normal;font-size:20px;line-height:1.8;letter-spacing:.02em}
+.face__ar .face__weights{font-size:18px;gap:6px 22px;margin-top:10px}
+@media (max-width:700px){.face__ar{grid-template-columns:minmax(0,1fr)}}
+/* Mobile menu: the bar's blur made the open panel collapse to zero height (a blurred parent traps fixed children).
+   Drop the blur while the menu is open and give the panel an explicit height. */
+@media (max-width:1100px){
+  .side.is-open{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}
+  .side.is-open .side__body{height:calc(100vh - 64px);height:calc(100dvh - 64px);overflow:hidden}
+  .side.is-open .side__links{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+}
+/* Mobile menu: animated open and close.
+   The panel stays in the layout and slides + fades instead of switching display, so it can animate both ways. */
+@media (max-width:1100px){
+  .side__body{display:flex;height:calc(100vh - 64px);height:calc(100dvh - 64px);overflow:hidden;
+    opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-16px);
+    transition:opacity .25s ease,transform .35s var(--ease),visibility 0s linear .35s}
+  .side.is-open .side__body{opacity:1;visibility:visible;pointer-events:auto;transform:none;
+    transition:opacity .3s ease,transform .45s var(--ease),visibility 0s}
+  /* chapters drift in one after another, and leave together */
+  .side__doc,.side__links a,.side__dl{opacity:0;transform:translateY(10px);transition:opacity .2s ease,transform .2s ease}
+  .side.is-open .side__doc,.side.is-open .side__links a,.side.is-open .side__dl{opacity:1;transform:none;
+    transition:opacity .4s ease var(--d,0s),transform .5s var(--ease) var(--d,0s)}
+  .side.is-open .side__doc{--d:.05s}
+  .side.is-open .side__links a:nth-child(1){--d:.08s}.side.is-open .side__links a:nth-child(2){--d:.11s}
+  .side.is-open .side__links a:nth-child(3){--d:.14s}.side.is-open .side__links a:nth-child(4){--d:.17s}
+  .side.is-open .side__links a:nth-child(5){--d:.2s}.side.is-open .side__links a:nth-child(6){--d:.23s}
+  .side.is-open .side__links a:nth-child(7){--d:.26s}.side.is-open .side__links a:nth-child(8){--d:.29s}
+  .side.is-open .side__links a:nth-child(9){--d:.32s}.side.is-open .side__links a:nth-child(10){--d:.35s}
+  .side.is-open .side__links a:nth-child(n+11){--d:.38s}
+  .side.is-open .side__dl{--d:.3s}
+  /* menu icon morphs into a close mark */
+  .side__menu i{transition:transform .35s var(--ease),opacity .2s}
+  .side__menu{-webkit-tap-highlight-color:transparent}
+}
+@media (max-width:1100px) and (prefers-reduced-motion:reduce){
+  .side__body,.side.is-open .side__body,.side__doc,.side__links a,.side__dl{transform:none!important;transition-duration:.01s!important;transition-delay:0s!important}
+}
+/* Essence pyramid: every tier's text sits at the vertical centre of its band (bands unchanged: 30 / 22 / 14 / 34) */
+@media (min-width:901px){
+  .pe .pe__t,.pe .pe__t--vis,.pe .pe__t--pur,.pe .pe__t--pla,.pe .pe__t--val{justify-content:center!important;padding-top:0!important;padding-bottom:0!important}
+}
+/* Essence pyramid: keep the centred vision line inside the narrow apex on smaller desktops */
+@media (min-width:901px) and (max-width:1320px){
+  .pe .pe__vis{max-width:118px;font-size:10.5px;line-height:1.35}
+  .pe .pe__t--vis .pe__k{font-size:10px}
+}
+/* Multi-orbit: headings share one row (bottom-aligned) so km lines and descriptions line up across columns */
+.orbits{grid-template-rows:auto auto auto;row-gap:0}
+.orbits > div{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
+.orbits > div > b{align-self:end}
+@media (max-width:900px){.orbits > div{grid-row:auto;grid-template-rows:none}}
+/* Essence pyramid: vision sits a little lower in its band (comment request) */
+@media (min-width:901px){ .pe .pe__t--vis{padding-top:5%!important} }
+/* Multi-orbit architecture — three contained cards (altitude-led) */
+.orbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.orb{display:flex;flex-direction:column;padding:28px 28px 32px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);min-width:0;transition:background .3s,border-color .3s}
+.orb:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.3)}
+.orb__k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-300)}
+.orb__alt{display:flex;align-items:baseline;gap:8px;margin:40px 0 6px;font-family:var(--display);font-weight:300;font-size:clamp(36px,3.6vw,56px);line-height:1;letter-spacing:-.03em;color:#fff;white-space:nowrap}
+.orb__alt small{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--blue-300)}
+.orb__n{display:block;font-family:var(--display);font-weight:400;font-size:18px;line-height:1.3;color:#fff;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,.16)}
+.orb__p{font-size:14px;line-height:1.55;color:rgba(255,255,255,.72);margin:0}
+@media (max-width:900px){.orbs{grid-template-columns:1fr;gap:12px}.orb{padding:24px}.orb__alt{margin-top:24px}}
+@media (min-width:901px){
+  .orbs{grid-template-rows:repeat(4,auto)}
+  .orb{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;align-content:start}
+  .orb__alt{align-self:end}
+  .orb__n{display:flex;align-items:flex-end}
+}
+.orb__alt{font-size:clamp(30px,2.7vw,46px);margin-bottom:14px}
+.orb__alt small{font-size:12px}
+@media (max-width:900px){.orb__alt{font-size:40px}}
+/* Sonic identity — simple pulse (replaces the talking wave) */
+.snc__wave{justify-content:center}
+.snp{position:relative;width:180px;height:180px;display:grid;place-items:center}
+.snp b{width:10px;height:10px;border-radius:50%;background:var(--solar);position:relative;z-index:1}
+.snp i{position:absolute;inset:0;margin:auto;width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.55);animation:snp 3.6s cubic-bezier(.2,.6,.3,1) infinite;opacity:0}
+.snp i:nth-child(2){animation-delay:1.2s}.snp i:nth-child(3){animation-delay:2.4s}
+@keyframes snp{0%{width:10px;height:10px;opacity:.9}100%{width:180px;height:180px;opacity:0}}
+@media (max-width:760px){.snp{width:120px;height:120px}@keyframes snp{0%{width:10px;height:10px;opacity:.9}100%{width:120px;height:120px;opacity:0}}}
+@media (prefers-reduced-motion:reduce){.snp i{animation:none;opacity:.3}.snp i:nth-child(1){width:60px;height:60px}.snp i:nth-child(2){width:120px;height:120px}.snp i:nth-child(3){width:180px;height:180px}}
+/* 03 Logo and icon — plate text aligned with the rest of the guidelines (h3 / mono label / h4 / body) */
+#logo .plate__h{font-weight:300;font-size:clamp(28px,3.2vw,42px);letter-spacing:-.03em;line-height:1.1;color:var(--ink,var(--blue));padding-right:0}
+#logo .plate__sub{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-top:14px}
+#logo .lt__b{border-top:1px solid var(--fog);padding:22px 0}
+#logo .lt__b:last-of-type{border-bottom:1px solid var(--fog)}
+#logo .lt__k{font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:-.01em;line-height:1.25;text-transform:none;color:var(--blue);margin-bottom:10px}
+#logo .lt__v{font-size:15px;line-height:1.65;color:var(--graphite)}
